@@ -6,13 +6,12 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Ruta hacia FrontEnd/public/imgs
-const frontendImgsPath = path.join(__dirname, "../../FrontEnd/public/imgs");
+// ✅ Nueva ruta: Backend/uploads
+const uploadsPath = path.join(__dirname, "../uploads");
 
-// Configuración de multer
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, frontendImgsPath); // guarda en FrontEnd/public/imgs
+    cb(null, uploadsPath); // guarda en Backend/uploads
   },
   filename: function (req, file, cb) {
     const ext = path.extname(file.originalname);
