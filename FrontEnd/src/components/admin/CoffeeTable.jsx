@@ -5,20 +5,16 @@ import ModalEliminar from "./modals/Delete/ModalDelete";
 import { createCafe, deleteCafeById, updateCoffee } from "../../services/api";
 
 function CoffeeTable({ cafes, origins, refreshData }) {
-  // Estado para almacenar el Café seleccionado
   const [selectedCafe, setSelectedCafe] = useState(null);
-  // Estado para el café a eliminar
   const [itemToDelete, setItemToDelete] = useState(null);
-
   const modalId = "modalAgregarCafe";
 
-  // Funcion para agregar un nuevo café
   const handleAgregar = async (data) => {
     try {
       const response = await createCafe(data);
       if (response && response.data) {
         console.log("Café creado:", response.data);
-        refreshData(); // Refresca la lista de cafés
+        refreshData();
       } else {
         console.error("Error al crear café:", response);
         alert("No se pudo crear el café. Revisa la consola.");
@@ -28,20 +24,18 @@ function CoffeeTable({ cafes, origins, refreshData }) {
     }
   };
 
-  // Función para manejar la eliminación de un café
   const handleDelete = async (id) => {
     try {
       await deleteCafeById(id);
       console.log("Café eliminado exitosamente");
       refreshData();
-      setItemToDelete(null); // Limpia el estado de eliminación
+      setItemToDelete(null);
     } catch (error) {
       console.error("Error al eliminar el café:", error);
       alert("Error al eliminar el café. Revisa la consola para más detalles.");
     }
   };
 
-  // Función para manejar la edición de un café
   const handleEdit = async (formData) => {
     try {
       const _id = formData.get("_id");
@@ -69,97 +63,101 @@ function CoffeeTable({ cafes, origins, refreshData }) {
         <i className="bi bi-plus me-2"></i>Agregar Café
       </button>
 
-      <table className="table table-dark table-bordered text-break mb-5">
-        <thead>
-          <tr className="text-center">
-            <th style={{ width: "15%" }}>Nombre</th>
-            <th style={{ width: "20%" }}>Descripción</th>
-            <th style={{ width: "15%" }}>Descripción Corta</th>
-            <th style={{ width: "5%" }}>Precio</th>
-            <th style={{ width: "5%" }}>Tostado</th>
-            <th style={{ width: "15%" }}>Nota de Sabor</th>
-            <th style={{ width: "5%" }}>Imagen</th>
-            <th style={{ width: "5%" }}>Origen</th>
-            <th style={{ width: "15%" }}>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {cafes.map((cafe) => (
-            <tr key={cafe._id}>
-              <td>{cafe.name}</td>
-              <td>
-                <span
-                  className="d-inline-block text-truncate"
-                  style={{ maxWidth: "150px" }}
-                  title={cafe.description}
-                >
-                  {cafe.description}
-                </span>
-              </td>
-              <td>
-                <span
-                  className="d-inline-block text-truncate"
-                  style={{ maxWidth: "120px" }}
-                  title={cafe.shortDescription}
-                >
-                  {cafe.shortDescription || "-"}
-                </span>
-              </td>
-              <td>{cafe.price ? `$${cafe.price}` : "-"}</td>
-              <td>{cafe.roastLevel}</td>
-              <td>
-                <span
-                  className="d-inline-block text-truncate"
-                  style={{ maxWidth: "120px" }}
-                  title={cafe.flavorNote}
-                >
-                  {cafe.flavorNote}
-                </span>
-              </td>
-              <td>
-                {cafe.image ? (
-                  <img
-                    src={`/imgs/${cafe.image}`}
-                    alt={cafe.name}
-                    title={cafe.image}
-                    className="d-block mx-auto"
-                    style={{
-                      height: "50px",
-                      objectFit: "cover",
-                      borderRadius: "4px",
-                    }}
-                  />
-                ) : (
-                  <span>Sin imagen</span>
-                )}
-              </td>
-              <td>{cafe.origin?.country || "N/A"}</td>
-              <td className="text-center align-middle">
-                <button
-                  className="btn-editar-crud btn me-3"
-                  data-bs-toggle="modal"
-                  data-bs-target="#modalEditar"
-                  onClick={() => setSelectedCafe(cafe)}
-                >
-                  <i className="bi bi-pen-fill text-light fs-5">
-                    <span className="d-none">Editar</span>
-                  </i>
-                </button>
-                <button
-                  className="btn-eliminar-crud btn"
-                  data-bs-toggle="modal"
-                  data-bs-target="#modalDelete"
-                  onClick={() => setItemToDelete(cafe)}
-                >
-                  <i className="bi bi-trash-fill fs-5 text-light">
-                    <span className="d-none">Eliminar</span>
-                  </i>
-                </button>
-              </td>
+      <div className="table-responsive">
+        <table className="table table-dark table-bordered text-break mb-5 align-middle">
+          <thead>
+            <tr className="text-center">
+              <th style={{ minWidth: "120px" }}>Nombre</th>
+              <th style={{ minWidth: "200px" }}>Descripción</th>
+              <th style={{ minWidth: "150px" }}>Descripción Corta</th>
+              <th style={{ minWidth: "80px" }}>Precio</th>
+              <th style={{ minWidth: "90px" }}>Tostado</th>
+              <th style={{ minWidth: "150px" }}>Nota de Sabor</th>
+              <th style={{ minWidth: "90px" }}>Imagen</th>
+              <th style={{ minWidth: "100px" }}>Origen</th>
+              <th style={{ minWidth: "130px" }}>Acciones</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {cafes.map((cafe) => (
+              <tr key={cafe._id}>
+                <td>{cafe.name}</td>
+                <td>
+                  <span
+                    className="d-inline-block text-truncate"
+                    style={{ maxWidth: "200px" }}
+                    title={cafe.description}
+                  >
+                    {cafe.description}
+                  </span>
+                </td>
+                <td>
+                  <span
+                    className="d-inline-block text-truncate"
+                    style={{ maxWidth: "150px" }}
+                    title={cafe.shortDescription}
+                  >
+                    {cafe.shortDescription || "-"}
+                  </span>
+                </td>
+                <td className="text-center">
+                  {cafe.price ? `$${cafe.price}` : "-"}
+                </td>
+                <td className="text-center">{cafe.roastLevel}</td>
+                <td>
+                  <span
+                    className="d-inline-block text-truncate"
+                    style={{ maxWidth: "150px" }}
+                    title={cafe.flavorNote}
+                  >
+                    {cafe.flavorNote}
+                  </span>
+                </td>
+                <td className="text-center">
+                  {cafe.image ? (
+                    <img
+                      src={`/imgs/${cafe.image}`}
+                      alt={cafe.name}
+                      title={cafe.image}
+                      className="d-block mx-auto"
+                      style={{
+                        height: "50px",
+                        objectFit: "cover",
+                        borderRadius: "4px",
+                      }}
+                    />
+                  ) : (
+                    <span>Sin imagen</span>
+                  )}
+                </td>
+                <td className="text-center">{cafe.origin?.country || "N/A"}</td>
+                <td className="text-center">
+                  <button
+                    className="btn-editar-crud btn me-3"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modalEditar"
+                    onClick={() => setSelectedCafe(cafe)}
+                  >
+                    <i className="bi bi-pen-fill text-light fs-5">
+                      <span className="d-none">Editar</span>
+                    </i>
+                  </button>
+                  <button
+                    className="btn-eliminar-crud btn"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modalDelete"
+                    onClick={() => setItemToDelete(cafe)}
+                  >
+                    <i className="bi bi-trash-fill fs-5 text-light">
+                      <span className="d-none">Eliminar</span>
+                    </i>
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       <ModalAgregar
         onSubmit={handleAgregar}
