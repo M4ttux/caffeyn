@@ -21,6 +21,9 @@ app.use((req, res, next) => {
     next();
 })
 
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+
 //creo la ruta index o root, donde se muestra el index.html (la documentacion)
 app.get('/', (req, res) => {
     res.status(200).send('public/index.html')

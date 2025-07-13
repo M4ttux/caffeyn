@@ -116,7 +116,13 @@ function CoffeeTable({ cafes, origins, refreshData }) {
                 <td className="text-center">
                   {cafe.image ? (
                     <img
-                      src={`/imgs/${cafe.image}`}
+                      src={
+                        cafe.image?.startsWith("http")
+                          ? cafe.image
+                          : `${import.meta.env.VITE_API_URL}/uploads/${
+                              cafe.image
+                            }`
+                      }
                       alt={cafe.name}
                       title={cafe.image}
                       className="d-block mx-auto"

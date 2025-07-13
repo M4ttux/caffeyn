@@ -8,7 +8,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Ruta absoluta al folder de imágenes en FrontEnd
-const imgDir = path.join(__dirname, "../../FrontEnd/public/imgs");
+const imgDir = path.join(__dirname, "../uploads");
 
 //Definir metodos http
 
