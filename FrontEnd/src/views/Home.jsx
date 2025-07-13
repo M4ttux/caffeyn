@@ -34,7 +34,7 @@ export function Home() {
           </div>
           <div data-aos="fade-left" className="col-lg-6 col-12 px-0">
             <img
-              src="public/imgs/home-01.jpg"
+              src="/imgs/home-01.jpg"
               alt="Experiencia cafetera única"
               className="w-100"
             />
@@ -47,7 +47,7 @@ export function Home() {
             className="col-lg-6 col-12 px-0 order-2 order-lg-1"
           >
             <img
-              src="public/imgs/home-02.jpg"
+              src="/imgs/home-02.jpg"
               alt="Origen natural"
               className="img-fluid w-100"
             />
@@ -90,7 +90,7 @@ export function Home() {
           </div>
           <div data-aos="fade-left" className="col-lg-6 col-12 px-0">
             <img
-              src="public/imgs/home-03.jpg"
+              src="/imgs/home-03.jpg"
               alt="Pasion por el sabor"
               className="img-fluid w-100"
             />

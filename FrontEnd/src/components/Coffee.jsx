@@ -2,7 +2,7 @@ function Coffee({ name, description, price, roastLevel, flavorNote, image, origi
   return (
     <div className="row justify-content-center align-items-center">
       <div data-aos="fade-right" className="pe-5 ps-5 col-lg-6 col-12">
-        <img src={`/public/imgs/${image}`} className="img-fluid d-block m-auto" alt={name}/>
+        <img src={`/imgs/${image}`} className="img-fluid d-block m-auto" alt={name}/>
       </div>
       <div data-aos="fade-left"className="pe-5 ps-5 col-lg-6 col-12">
         <h2 className="ps-md-5 ps-me-5 ps-lg-0 pe-lg-0 mb-3 pt-5 pt-lg-0 card-title">{name}</h2>
