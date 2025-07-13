@@ -87,11 +87,35 @@ function CoffeeTable({ cafes, origins, refreshData }) {
           {cafes.map((cafe) => (
             <tr key={cafe._id}>
               <td>{cafe.name}</td>
-              <td>{cafe.description}</td>
-              <td>{cafe.shortDescription || "-"}</td>
+              <td>
+                <span
+                  className="d-inline-block text-truncate"
+                  style={{ maxWidth: "150px" }}
+                  title={cafe.description}
+                >
+                  {cafe.description}
+                </span>
+              </td>
+              <td>
+                <span
+                  className="d-inline-block text-truncate"
+                  style={{ maxWidth: "120px" }}
+                  title={cafe.shortDescription}
+                >
+                  {cafe.shortDescription || "-"}
+                </span>
+              </td>
               <td>{cafe.price ? `$${cafe.price}` : "-"}</td>
               <td>{cafe.roastLevel}</td>
-              <td>{cafe.flavorNote}</td>
+              <td>
+                <span
+                  className="d-inline-block text-truncate"
+                  style={{ maxWidth: "120px" }}
+                  title={cafe.flavorNote}
+                >
+                  {cafe.flavorNote}
+                </span>
+              </td>
               <td>
                 {cafe.image ? (
                   <img
@@ -117,7 +141,9 @@ function CoffeeTable({ cafes, origins, refreshData }) {
                   data-bs-target="#modalEditar"
                   onClick={() => setSelectedCafe(cafe)}
                 >
-                  <i className="bi bi-pen-fill text-light fs-5"><span className="d-none">Editar</span></i>
+                  <i className="bi bi-pen-fill text-light fs-5">
+                    <span className="d-none">Editar</span>
+                  </i>
                 </button>
                 <button
                   className="btn-eliminar-crud btn"
@@ -125,7 +151,9 @@ function CoffeeTable({ cafes, origins, refreshData }) {
                   data-bs-target="#modalDelete"
                   onClick={() => setItemToDelete(cafe)}
                 >
-                  <i className="bi bi-trash-fill fs-5 text-light"><span className="d-none">Eliminar</span></i>
+                  <i className="bi bi-trash-fill fs-5 text-light">
+                    <span className="d-none">Eliminar</span>
+                  </i>
                 </button>
               </td>
             </tr>
