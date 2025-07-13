@@ -4,7 +4,13 @@ import cors from "cors";
 import routerAPI from "./routes/index.js";
 import db from "./config/dataBase.js";
 import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 //asigno el puerto que viene desde el .env, en caso de estar vacio x defecto mando 3000
 const port = process.env.PORT || 3000;
