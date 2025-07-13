@@ -5,12 +5,11 @@ function CoffeeCard({ name, shortDescription, image, price, origin }) {
         src={
           image?.startsWith("http")
             ? image
-            : `${import.meta.env.VITE_API_URL}/uploads/${image}`
+            : `${import.meta.env.VITE_API_URL.replace("/api", "")}/uploads/${image}`
         }
         alt={name}
         className="coffee-image"
       />
-
       <div className="coffee-content">
         <h3 className="coffee-title">{name}</h3>
         <p className="coffee-origin">

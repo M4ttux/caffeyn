@@ -119,9 +119,10 @@ function CoffeeTable({ cafes, origins, refreshData }) {
                       src={
                         cafe.image?.startsWith("http")
                           ? cafe.image
-                          : `${import.meta.env.VITE_API_URL}/uploads/${
-                              cafe.image
-                            }`
+                          : `${import.meta.env.VITE_API_URL.replace(
+                              "/api",
+                              ""
+                            )}/uploads/${cafe.image}`
                       }
                       alt={cafe.name}
                       title={cafe.image}
